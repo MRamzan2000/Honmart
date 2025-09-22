@@ -1,25 +1,38 @@
+import 'dart:async';
+import 'package:app/main.dart';
 import 'package:flutter/material.dart';
 
-class CurrencyConverterPage extends StatefulWidget{
-  const CurrencyConverterPage({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  State<CurrencyConverterPage> createState()=>_CurrencyConverterPageState();
+  SplashScreenState createState() => SplashScreenState();
 }
-class _CurrencyConverterPageState extends State<CurrencyConverterPage>{
+
+class SplashScreenState extends State<SplashScreen> {
   @override
-  Widget build(BuildContext context){
+  void initState() {
+    super.initState();
+
+    /// 2 second wait then move to WebViewScreen
+    Timer(const Duration(seconds: 5), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const WebViewScreen()),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:Text("Currency Converter",
-        style:TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-        ) ,),
-
-        
+      body: SizedBox(
+        height: MediaQuery.sizeOf(context).height,
+        width: MediaQuery.sizeOf(context).width,
+        child: Image.asset(
+          "assets/applogo.png",
+          fit: BoxFit.fitWidth,
+        ),
       ),
-
     );
   }
 }
-

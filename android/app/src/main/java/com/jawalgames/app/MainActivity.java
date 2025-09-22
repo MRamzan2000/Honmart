@@ -1,4 +1,4 @@
-package com.jawalgames.android;
+package net.jawalgames.app;
 
 import io.flutter.embedding.android.FlutterActivity;
 
