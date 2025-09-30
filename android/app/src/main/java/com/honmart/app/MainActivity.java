@@ -1,4 +1,4 @@
-package net.jawalgames.app;
+package com.honmart.app;
 
 import io.flutter.embedding.android.FlutterActivity;
 

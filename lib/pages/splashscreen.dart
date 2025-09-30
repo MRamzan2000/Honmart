@@ -13,11 +13,9 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    /// 2 second wait then move to WebViewScreen
     Timer(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const WebViewScreen()),
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
     });
   }
@@ -28,9 +26,22 @@ class SplashScreenState extends State<SplashScreen> {
       body: SizedBox(
         height: MediaQuery.sizeOf(context).height,
         width: MediaQuery.sizeOf(context).width,
-        child: Image.asset(
-          "assets/applogo.png",
-          fit: BoxFit.fitWidth,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/applogo.png",
+              fit: BoxFit.fitWidth,
+              height: 200,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            CircularProgressIndicator(
+              strokeWidth: 5,
+              color: Color(0xff0987ea),
+            )
+          ],
         ),
       ),
     );

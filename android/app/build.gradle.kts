@@ -18,6 +18,7 @@ val localProperties = Properties().apply {
 val flutterVersionCode = localProperties.getProperty("flutter.versionCode")?.toInt() ?: 1
 val flutterVersionName = localProperties.getProperty("flutter.versionName") ?: "1.0"
 
+// ✅ Load keystore from key.properties
 val keystoreProperties = Properties().apply {
     val keystoreFile = rootProject.file("key.properties")
     if (keystoreFile.exists()) {
@@ -26,12 +27,12 @@ val keystoreProperties = Properties().apply {
 }
 
 android {
-    namespace = "net.jawalgames.app" // <-- change to your package name
+    namespace = "com.honmart.app" // <-- change to your package name
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     defaultConfig {
-        applicationId = "net.jawalgames.app" // <-- change if needed
+        applicationId = "com.honmart.app"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode
@@ -39,12 +40,13 @@ android {
         multiDexEnabled = true
     }
 
+    // ✅ Release signing config
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String?
-            keyPassword = keystoreProperties["keyPassword"] as String?
-            storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-            storePassword = keystoreProperties["storePassword"] as String?
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
         }
     }
 
@@ -55,7 +57,8 @@ android {
             isShrinkResources = false
         }
         getByName("debug") {
-            signingConfig = signingConfigs.getByName("release")
+            // Debug build can also use release signing if needed
+            // signingConfig = signingConfigs.getByName("release")
         }
     }
 

@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.jawalgames.app">
+    package="com.honmart.app">
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:label="JawalGames"
+        android:label="Honmart"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
