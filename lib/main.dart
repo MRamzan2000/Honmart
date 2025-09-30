@@ -20,7 +20,7 @@ class HonmartApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Roboto',
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
@@ -40,9 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<String> _urls = [
     "https://honmartshop.com/",
-    "https://honmartshop.com/best-sellers/",
-    "https://honmartshop.com/latest-products/",
     "https://honmartshop.com/shop/",
+    "https://honmartshop.com/cart/",
+    "https://honmartshop.com/my-account/",
   ];
 
   @override
@@ -106,18 +106,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff0987ea),
+      backgroundColor: const Color(0xff2b7cef), // ✅ Client requested color
       body: !_hasInternet
           ? _buildNoInternetScreen()
           : Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: RefreshIndicator(
-              onRefresh: _reloadPage,
-              child: WebViewWidget(controller: _controller),
+          // ✅ WebView tab visible hoga jab page load complete ho
+          if (!_isLoading)
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: RefreshIndicator(
+                onRefresh: _reloadPage,
+                child: WebViewWidget(controller: _controller),
+              ),
             ),
-          ),
+
+          // ✅ Loader tab show hoga jab page load ho raha ho
           if (_isLoading)
             const Center(
               child: CircularProgressIndicator(color: Colors.white),
@@ -133,19 +137,19 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "Inicio",
+            label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            label: "Mas Vendidos",
+            icon: Icon(Icons.shopping_bag_outlined),
+            label: "Shop",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: "Productos",
+            icon: Icon(Icons.shopping_cart),
+            label: "Cart",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.store),
-            label: "Tienda",
+            icon: Icon(Icons.person),
+            label: "Profile",
           ),
         ],
       ),
