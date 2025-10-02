@@ -121,7 +121,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-          // ✅ Loader tab show hoga jab page load ho raha ho
           if (_isLoading)
             const Center(
               child: CircularProgressIndicator(color: Colors.white),
@@ -137,19 +136,19 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "Home",
+            label: "Inicio",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag_outlined),
-            label: "Shop",
+            label: "Tienda",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            label: "Cart",
+            label: "Carrito",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: "Profile",
+            label: "Perfil",
           ),
         ],
       ),
